@@ -1,0 +1,14 @@
+name: Mirror to Codeberg
+
+on: [push, delete, create]
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror Repository
+        uses: yesolutions/mirror-repository@v1.4.0
+        with:
+          target_url: 'https://codeberg.org'
+          target_username: 'YuvalKolodkin'
+          target_token: ${{ secrets.CODEBERG_TOKEN }}
