@@ -3,8 +3,6 @@
 
 **CalcuLab** is a user-friendly toolkit for laboratory professionals, researchers, and students. It provides 39 calculators for common lab procedures, data analysis, and experimental design — all in one place.
 
-> **Mirror:** This repository is also mirrored on GitLab at [gitlab.com/yuvalkgal/Calculab](https://gitlab.com/yuvalkgal/Calculab).
-
 ---
 
 ## 🚀 Features
