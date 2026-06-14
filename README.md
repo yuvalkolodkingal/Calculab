@@ -1,7 +1,5 @@
 # 🧪 CalcuLab
 
-[![CI](https://github.com/lucknite/Calculab/actions/workflows/ci.yml/badge.svg)](https://github.com/lucknite/Calculab/actions/workflows/ci.yml)
-[![Deploy](https://github.com/lucknite/Calculab/actions/workflows/deploy.yml/badge.svg)](https://github.com/lucknite/Calculab/actions/workflows/deploy.yml)
 
 **CalcuLab** is a user-friendly toolkit for laboratory professionals, researchers, and students. It provides 39 calculators for common lab procedures, data analysis, and experimental design — all in your browser.
 
