@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Github } from 'lucide-react';
 import Modal from './components/Modal';
 import ScrollToTop from './components/ScrollToTop';
 import LandingPage from './pages/LandingPage';
@@ -246,6 +247,15 @@ function App() {
         <Route path="/" element={<LandingPage onEnterApp={() => navigate('/app')} />} />
         <Route path="/app" element={
         <div className="container">
+          <a
+            href="https://github.com/yuvalkolodkingal/Calculab"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="github-topbar-link"
+            title="View on GitHub"
+          >
+            <Github size={24} />
+          </a>
           <div className="header">
             <h1>
               <img 

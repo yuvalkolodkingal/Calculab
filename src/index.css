@@ -31,6 +31,35 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px;
+  position: relative;
+}
+
+.github-topbar-link {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  z-index: 10;
+}
+
+.github-topbar-link:hover {
+  color: var(--text-dark);
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .github-topbar-link {
+    top: 20px;
+    right: 15px;
+  }
 }
 
 .header {
