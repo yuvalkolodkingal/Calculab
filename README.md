@@ -1,7 +1,7 @@
 # 🧪 CalcuLab
 
 
-**CalcuLab** is a user-friendly toolkit for laboratory professionals, researchers, and students. It provides 39 calculators for common lab procedures, data analysis, and experimental design — all in one place.
+**CalcuLab** is a user-friendly toolkit for laboratory professionals, researchers, and students. It provides 39 calculators for common lab procedures, data analysis, and experimental design — all[...]
 
 ---
 
@@ -31,6 +31,8 @@
 3. **Calculate:** Select a calculator or tool from the interface.
 
 Or visit the live website: https://www.calculab.bio/
+
+**Mirror:** This repository is also mirrored on Codeberg at https://codeberg.org/YuvalKolodkin/Calculab
 
 ---
 
