@@ -249,7 +249,7 @@ function App() {
           <div className="header">
             <h1>
               <img 
-                src="/logo.svg" 
+                src={`${import.meta.env.BASE_URL}logo.svg`} 
                 alt="CalcuLab logo" 
                 className="logo" 
                 onClick={handleLogoClick}

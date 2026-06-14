@@ -1,18 +1,18 @@
 const CACHE_NAME = 'calculab-v3';
 const urlsToCache = [
-  '/',
-  '/app',
-  '/index.html',
-  '/manifest.json',
-  '/favicon.ico',
-  '/apple-touch-icon.png',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/icon-192-maskable.png',
-  '/icon-512-maskable.png',
-  '/icon-monochrome.svg',
-  '/logo.svg',
-  '/logo.png'
+  './',
+  './app',
+  './index.html',
+  './manifest.json',
+  './favicon.ico',
+  './apple-touch-icon.png',
+  './icon-192.png',
+  './icon-512.png',
+  './icon-192-maskable.png',
+  './icon-512-maskable.png',
+  './icon-monochrome.svg',
+  './logo.svg',
+  './logo.png'
 ];
 
 // Install event - cache essential assets
@@ -75,7 +75,7 @@ self.addEventListener('fetch', (event) => {
           }
           // For navigation requests, return the cached app page as fallback
           if (event.request.mode === 'navigate') {
-            return caches.match('/app');
+            return caches.match('./app') || caches.match('/app');
           }
         });
       })

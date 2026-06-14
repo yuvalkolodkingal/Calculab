@@ -88,8 +88,8 @@ const LandingPage = ({ onEnterApp }) => {
             {config.header.enabled && (
                 <header className={`landing-header ${config.header.sticky ? 'sticky' : ''}`}>
                     <div className="header-content">
-                        <a href="/" className="header-logo">
-                            <img src="/logo.svg" alt="Logo" />
+                        <a href={import.meta.env.BASE_URL} className="header-logo">
+                            <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Logo" />
                             <span>{config.header.logo}</span>
                         </a>
                         <nav className="header-nav">
@@ -175,11 +175,11 @@ const LandingPage = ({ onEnterApp }) => {
                     <div className="hero-visual animate-on-scroll">
                         <div className="browser-mockup">
                             <div className="mockup-image">
-                                <img src="/hero-mockup.png" alt="Lab Calculator Interface" />
+                                <img src={`${import.meta.env.BASE_URL}hero-mockup.png`} alt="Lab Calculator Interface" />
                             </div>
                         </div>
                         <div className="floating-mobile">
-                            <img src="/mobile-mockup.png" alt="Mobile Interface" />
+                            <img src={`${import.meta.env.BASE_URL}mobile-mockup.png`} alt="Mobile Interface" />
                         </div>
                     </div>
 
@@ -335,7 +335,7 @@ const LandingPage = ({ onEnterApp }) => {
                     <div className="footer-content">
                         <div className="footer-branding">
                             <div className="footer-logo">
-                                <img src="/logo.svg" alt="Logo" />
+                                <img src={`${import.meta.env.BASE_URL}logo.svg`} alt="Logo" />
                                 <span>{config.footer.logo}</span>
                             </div>
                             {config.footer.credits && (
