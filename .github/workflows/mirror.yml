@@ -6,9 +6,16 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Mirror Repository
-        uses: yesolutions/mirror-repository@v1.4.0
+      # Step 1: Tell GitHub to download your repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          target_url: 'https://codeberg.org'
-          target_username: 'YuvalKolodkin'
-          target_token: ${{ secrets.CODEBERG_TOKEN }}
+          fetch-depth: 0 # Essential to pull all branches and git history
+
+      # Step 2: Use a mirroring action to push everything to Codeberg
+      - name: Mirror to Codeberg
+        uses: yesolutions/mirror-action@master
+        with:
+          REMOTE: 'https://codeberg.org'
+          GIT_USERNAME: 'YuvalKolodkin'
+          GIT_PASSWORD: ${{ secrets.CODEBERG_TOKEN }}
