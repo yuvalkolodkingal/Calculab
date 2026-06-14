@@ -30,7 +30,7 @@
 2. **Open** http://localhost:5173
 3. **Calculate:** Select a calculator or tool from the interface.
 
-Or visit the live demo: https://lucknite.github.io/Calculab/app
+Or visit the live website: https://www.calculab.bio/
 
 ---
 
