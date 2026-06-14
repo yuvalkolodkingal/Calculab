@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Temporary files
+temp/
+*.tmp
+*.log
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build output
+dist/
+
+# Amplify
+amplify/.config/local-*
+amplify/logs
+amplify/mock-data
+amplify/mock-api-resources
+amplify/backend/amplify-meta.json
+amplify/backend/.temp
+amplify/#current-cloud-backend
+
+# AWS SAM
+.aws-sam/
+
+docs/COMMIT_MESSAGE.md

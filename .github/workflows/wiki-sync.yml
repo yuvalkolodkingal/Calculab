@@ -1,0 +1,53 @@
+name: Sync Wiki
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/wiki/**'
+
+# Sets permissions of the GITHUB_TOKEN to allow pushing to the Wiki repository
+permissions:
+  contents: write
+
+jobs:
+  sync-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Repo
+        uses: actions/checkout@v4
+
+      - name: Sync to GitHub Wiki
+        run: |
+          echo "Setting up Git authentication..."
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Clone the wiki repository (cloned into a temp directory 'wiki_repo')
+          echo "Cloning the repository wiki..."
+          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki_repo || {
+            echo "Wiki repository does not exist or is not initialized yet."
+            echo "Please create at least one page on your GitHub Wiki via the browser first."
+            exit 1
+          }
+          
+          # Clear existing markdown files in the wiki directory to ensure sync completeness
+          rm -rf wiki_repo/*.md
+          
+          # Copy all wiki files from .github/wiki/ to the wiki repository
+          echo "Copying wiki source files..."
+          cp .github/wiki/*.md wiki_repo/
+          
+          # Navigate into the wiki repo
+          cd wiki_repo
+          
+          # Check for changes and push them
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Changes detected. Committing and pushing to Wiki..."
+            git add .
+            git commit -m "Auto-sync Wiki from main repository (.github/wiki)"
+            git push origin master || git push origin main
+          else
+            echo "No changes detected. Wiki is already up to date."
+          fi

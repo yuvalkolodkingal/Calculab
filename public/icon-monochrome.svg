@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+  <defs>
+    <style>
+      .mono-path { fill: currentColor; }
+      .mono-bg { fill: currentColor; }
+      .mono-content { fill: white; }
+    </style>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect class="mono-bg" x="50" y="50" width="400" height="400" rx="80" ry="80"/>
+  
+  <!-- M in top-left quadrant -->
+  <text class="mono-content" x="150" y="200" font-size="120" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">M</text>
+  
+  <!-- N and subscript A in top-right quadrant -->
+  <text class="mono-content" x="320" y="200" font-size="120" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">N</text>
+  <text class="mono-content" x="380" y="210" font-size="60" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">A</text>
+  
+  <!-- μ (mu) in bottom-left quadrant -->
+  <text class="mono-content" x="150" y="360" font-size="140" font-weight="bold" font-family="Arial, sans-serif" text-anchor="middle">μ</text>
+  
+  <!-- = (equals) in bottom-right quadrant -->
+  <g class="mono-content">
+    <rect x="310" y="310" width="80" height="18" rx="9"/>
+    <rect x="310" y="345" width="80" height="18" rx="9"/>
+  </g>
+</svg>

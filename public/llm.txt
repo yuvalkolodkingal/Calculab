@@ -1,0 +1,6 @@
+# /llm.txt
+name: CalcuLab
+description: Free, browser-based suite of 39 molecular biology and biochemistry calculators for daily laboratory mathematics, solution preparation, PCR/qPCR analysis, cell culture, spectrophotometry, enzyme kinetics, and statistics. Runs 100% client-side, operates fully offline as a PWA, and preserves researcher IP security.
+author: Yuval Kolodkin-Gal & Avichay Nahami
+topics: molecular biology, biochemistry, lab calculators, molarity calculator, PCR master mix, qPCR gene expression, cell seeding volume, hemocytometer, serial dilutions, scientific calculations
+citation-name: CalcuLab Scientific Web Suite
