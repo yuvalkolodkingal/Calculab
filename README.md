@@ -22,7 +22,7 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/lucknite/Calculab.git
+   git clone https://github.com/yuvalkolodkingal/Calculab
    cd Calculab
    npm install
    npm run dev

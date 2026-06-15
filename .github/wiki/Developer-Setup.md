@@ -12,7 +12,7 @@ Follow this guide to check out the CalcuLab source, run local development server
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/lucknite/Calculab.git
+git clone https://github.com/yuvalkolodkingal/Calculab
 cd Calculab
 ```
 
