@@ -1,6 +1,9 @@
 name: Mirror to Codeberg
 
-on: [push, delete, create]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   mirror:
