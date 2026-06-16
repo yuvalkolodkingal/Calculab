@@ -32,8 +32,6 @@
 
 Or visit the live website: https://www.calculab.bio/
 
-**Mirror:** This repository is also mirrored on Codeberg at https://codeberg.org/YuvalKolodkin/Calculab
-
 ---
 
 ## 📦 Tech Stack
@@ -42,6 +40,8 @@ Or visit the live website: https://www.calculab.bio/
 - React Router
 - Pure client-side (no backend)
 - Deployed to GitHub Pages via GitHub Actions
+
+**Architecture diagrams:** [View stack and file structure in FigJam](https://www.figma.com/board/1Z5xRD4guOUkDw5MjXVoLr/CalcuLab-Technology-Stack?node-id=0-1&t=qIqOZNHdWJMMjhVg-1)
 
 ---
 
