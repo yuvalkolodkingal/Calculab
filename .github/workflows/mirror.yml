@@ -1,9 +1,6 @@
 name: Mirror to Codeberg
 
-on:
-  push:
-    branches:
-      - main
+on: [push, delete, create]
 
 jobs:
   mirror:
@@ -20,7 +17,12 @@ jobs:
         run: |
           # Configure Codeberg authenticated URL using your secret token
           git remote add codeberg https://YuvalKolodkin:${CODEBERG_TOKEN}@codeberg.org/YuvalKolodkin/Calculab.git
-          
+
+          # Checkout only materialises the triggering branch as a local ref.
+          # Fetch every origin branch locally first so --prune does not try to
+          # delete remote branches (including main) that still exist on GitHub.
+          git fetch origin '+refs/heads/*:refs/heads/*'
+
           # Force push all branches and tags to Codeberg
           git push codeberg --prune --force --all
           git push codeberg --prune --force --tags
