@@ -41,7 +41,11 @@ Or visit the live website: https://www.calculab.bio/
 - React 19 + Vite
 - React Router
 - Pure client-side (no backend)
-- Deployed to GitHub Pages via GitHub Actions
+- Deployed to GitHub Pages and AWS Amplify via GitHub Actions
+
+![CalcuLab tech stack and file structure](./docs/diagrams/calcuLab-tech-stack-structure.png)
+
+The diagram shows how the tech stack, source directories, and deployment pipeline connect. An editable version lives in [FigJam](https://www.figma.com/board/TWSia3F77eh4wc9PIoq7bg). Full architecture docs: [Wiki](https://github.com/yuvalkolodkingal/Calculab/wiki/Architecture-and-File-Structure).
 
 ---
 
