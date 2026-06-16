@@ -32,8 +32,6 @@
 
 Or visit the live website: https://www.calculab.bio/
 
-**Mirror:** This repository is also mirrored on Codeberg at https://codeberg.org/YuvalKolodkin/Calculab
-
 ---
 
 ## 📦 Tech Stack
