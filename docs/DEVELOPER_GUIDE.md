@@ -8,6 +8,8 @@ Welcome to the **CalcuLab** Developer Guide. This document provides a complete r
 
 CalcuLab is a pure, serverless, client-side React application with zero external API dependencies. All calculations are run instantaneously in the user's browser.
 
+**Architecture diagrams:** [View stack and file structure in FigJam](https://www.figma.com/board/1Z5xRD4guOUkDw5MjXVoLr/CalcuLab-Technology-Stack?node-id=0-1&t=qIqOZNHdWJMMjhVg-1)
+
 ### Directory Structure
 
 ```text

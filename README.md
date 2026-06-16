@@ -43,6 +43,8 @@ Or visit the live website: https://www.calculab.bio/
 - Pure client-side (no backend)
 - Deployed to GitHub Pages via GitHub Actions
 
+**Architecture diagrams:** [View stack and file structure in FigJam](https://www.figma.com/board/1Z5xRD4guOUkDw5MjXVoLr/CalcuLab-Technology-Stack?node-id=0-1&t=qIqOZNHdWJMMjhVg-1)
+
 ---
 
 ## 🧪 Development
