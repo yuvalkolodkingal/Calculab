@@ -1,67 +1,69 @@
-# Calculator Component Contract 📜
+# Calculator Component Contract
 
-To maintain a consistent look, standard behavior, and reliable layouts across all 39 calculators in CalcuLab, every component inside `src/calculators/` must strictly adhere to the project's technical interface contract.
+Every file in `src/calculators/` must follow this contract so calculators integrate cleanly with the dashboard, modal system, and status bar.
 
 ---
 
-## 🛠️ Props Contract
+## Props
 
-Each calculator is rendered inside a global React Modal overlay controlled by `src/App.jsx`. To integrate safely, it must accept and utilize the following two props:
+Calculators are rendered inside a global `<Modal>` managed by `src/App.jsx`.
 
 ```jsx
-export default function NewCalculator({ onClose, onStatusUpdate }) { ... }
+export default function MyCalculator({ onClose, onStatusUpdate }) {
+  // ...
+}
 ```
 
-### 1. `onClose`
-* **Type:** `function`
-* **Trigger:** Call when the user clicks the "Cancel" or "Close" button.
-* **Effect:** Clears active modal states and restores standard main dashboard page scrolling.
+### `onClose`
 
-### 2. `onStatusUpdate`
-* **Type:** `function`
-* **Signature:** `onStatusUpdate(message: string, color?: string)`
-* **Effect:** Overwrites the text inside the global sticky status bar.
-* **Conventions:**
-  * For successful calculations, output a success message in green: `onStatusUpdate('Status: Calculated successfully!', 'green')` (or `#28a745`).
-  * For errors or validation failures, output a detailed message in red: `onStatusUpdate('Status: Calculation failed - Input is out of bounds', 'red')` (or `#dc3545`).
+- **Type:** `function`
+- **When to call:** User clicks Cancel or Close
+- **Effect:** Closes the modal and restores page scrolling
 
----
+### `onStatusUpdate(message, color?)`
 
-## 📐 DOM Output Layout Contract
+- **Type:** `function`
+- **When to call:** After every calculation attempt (success or failure)
+- **Effect:** Updates the global sticky status bar
 
-The global `<Modal>` container implements a `MutationObserver` that monitors the calculator viewport. It searches dynamically for specific elements when children update and automatically scrolls the user's viewport smoothy to keep results or errors in center view.
-
-### 1. Results Element (`.result`)
-* **Requirement:** Wrap all final mathematical output details inside a container with `className="result"`.
-* **Example:**
-  ```jsx
-  {result && (
-    <div className="result">
-      <strong>Molarity required: {result.molarity}</strong>
-    </div>
-  )}
-  ```
-
-### 2. Errors Element (`.error`)
-* **Requirement:** Wrap all validation, out-of-bounds, or division-by-zero exceptions inside a container with `className="error"`.
-* **Example:**
-  ```jsx
-  {error && (
-    <div className="error">
-      Error: {error}
-    </div>
-  )}
-  ```
+| Outcome | Color | Example |
+|---------|-------|---------|
+| Success | `'green'` or `'#28a745'` | `onStatusUpdate('Status: Calculated successfully!', 'green')` |
+| Failure | `'red'` or `'#dc3545'` | `onStatusUpdate('Status: Input out of bounds', 'red')` |
 
 ---
 
-## ⚡ Shared Component Integrations
+## DOM output classes
 
-### 1. Using `<UnitInput />`
-When asking the user for quantities that require scientific units (e.g., Volumes in Liters, Milliliters, Microliters), use the shared `<UnitInput />` component found under `src/components/UnitInput.jsx`.
+The `<Modal>` component uses a `MutationObserver` to auto-scroll results and errors into view. Use these exact class names:
 
-* State variables coupled with `UnitInput` are **always stored in standard base units** (e.g. standard Liters for Volume, standard Molar for Concentration, standard Grams for Mass).
-* The component automatically renders dropdowns and updates parent states with correct multiplier factors.
+### Results — `className="result"`
+
+```jsx
+{result && (
+  <div className="result">
+    <strong>Molarity: {result.value}</strong>
+  </div>
+)}
+```
+
+### Errors — `className="error"`
+
+```jsx
+{error && (
+  <div className="error">
+    Error: {error}
+  </div>
+)}
+```
+
+---
+
+## Shared components
+
+### UnitInput
+
+Use for any numeric field that needs unit selection (volume, mass, concentration, etc.).
 
 ```jsx
 import UnitInput from '../components/UnitInput';
@@ -69,7 +71,7 @@ import UnitInput from '../components/UnitInput';
 const volumeUnits = ['L', 'mL', 'μL', 'nL'];
 
 <UnitInput
-  label="Total Solution Volume:"
+  label="Total Volume:"
   value={volume}
   onChange={setVolume}
   baseUnit="L"
@@ -79,14 +81,92 @@ const volumeUnits = ['L', 'mL', 'μL', 'nL'];
 />
 ```
 
-### 2. Result Formatting with `formatWithSIPrefix()`
-Display mathematical results using the `formatWithSIPrefix` helper in `src/utils/mathUtils.js` to automatically attach clean unit suffixes.
+State values paired with `UnitInput` are **always stored in base units** (e.g. liters for volume, moles for amount). The component handles prefix conversion.
+
+### formatWithSIPrefix
+
+Display results with appropriate SI prefixes:
 
 ```javascript
 import { formatWithSIPrefix } from '../utils/mathUtils';
 
-const formattedVal = formatWithSIPrefix(0.0000045, 'M', 3);
-// Returns: "4.500 μM"
+formatWithSIPrefix(0.0000045, 'M', 3);
+// "4.500 μM"
 ```
 
-> ⚠️ **Critical mu (μ) character convention:** Always use the Unicode character **`μ`** (U+00B5, micro sign), rather than the Greek mu **`μ`** (U+03BC) inside unit list strings. Using incorrect mu characters will break `UnitInput` multiplier matches.
+---
+
+## Micro sign convention
+
+Always use the Unicode **micro sign** `μ` (U+00B5), not the Greek letter mu `μ` (U+03BC), in unit strings:
+
+```javascript
+// Correct
+const units = ['L', 'mL', 'μL', 'nL'];
+
+// Wrong — breaks UnitInput and mathUtils matching
+const units = ['L', 'mL', 'μL', 'nL'];
+```
+
+---
+
+## Minimal template
+
+```jsx
+import { useState } from 'react';
+import UnitInput from '../components/UnitInput';
+import { formatWithSIPrefix } from '../utils/mathUtils';
+
+export default function SampleCalculator({ onClose, onStatusUpdate }) {
+  const [inputVal, setInputVal] = useState('');
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleCalculate = () => {
+    setError(null);
+    setResult(null);
+
+    try {
+      const parsed = parseFloat(inputVal);
+      if (isNaN(parsed) || parsed <= 0) {
+        throw new Error('Input must be a positive number.');
+      }
+
+      const output = parsed * 2;
+      setResult({ output: formatWithSIPrefix(output, 'g', 3) });
+      onStatusUpdate('Status: Calculation successful!', 'green');
+    } catch (err) {
+      setError(err.message);
+      onStatusUpdate(`Status: ${err.message}`, 'red');
+    }
+  };
+
+  return (
+    <div>
+      <div className="form-group">
+        <label>Value (g):</label>
+        <input
+          type="number"
+          value={inputVal}
+          onChange={(e) => setInputVal(e.target.value)}
+          placeholder="1.0"
+        />
+      </div>
+
+      <div className="button-group">
+        <button className="btn btn-primary" onClick={handleCalculate}>Calculate</button>
+        <button className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      </div>
+
+      {error && <div className="error">Error: {error}</div>}
+      {result && (
+        <div className="result">
+          <strong>Result: {result.output}</strong>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+For the full registration workflow, see [Developer Setup](Developer-Setup#5-adding-a-new-calculator).

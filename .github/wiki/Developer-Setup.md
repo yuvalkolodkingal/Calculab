@@ -1,72 +1,154 @@
-# Developer Setup & Guidelines 💻
+# Developer Setup
 
-Follow this guide to check out the CalcuLab source, run local development servers, write tests, and verify lint rules.
+This guide covers local development from clone to pull request. For architecture context, see [Architecture & File Structure](Architecture-and-File-Structure).
 
 ---
 
-## 🛠️ Local Installation
+## Prerequisites
 
-### Prerequisites
-* **Node.js:** v20 (LTS) or higher
-* **npm:** v10 or higher
+| Tool | Version |
+|------|---------|
+| Node.js | 20 LTS or higher |
+| npm | 10 or higher |
 
-### 1. Clone the Repository
+---
+
+## 1. Clone and install
+
 ```bash
 git clone https://github.com/yuvalkolodkingal/Calculab
 cd Calculab
-```
-
-### 2. Install Dependencies
-Install all package dependencies. Note that the `package-lock.json` file is tracked in git for lock consistency.
-```bash
 npm install
 ```
 
-### 3. Run Development Server
-Launches the Vite HMR (Hot Module Replacement) development server locally.
-```bash
-npm run dev
-```
-Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+`package-lock.json` is tracked — use `npm install` locally and `npm ci` in CI.
 
 ---
 
-## 🧪 Running Tests & Lints
+## 2. Start the dev server
 
-CalcuLab implements zero-DOM math correctness testing. Our focus is on absolute calculation reliability.
-
-### 1. Running Unit Tests
-We use **Vitest** for testing:
-* **Interactive watch mode (for active development):**
-  ```bash
-  npm test
-  ```
-* **Run once (CI style):**
-  ```bash
-  npm run test:run
-  ```
-
-### 2. Running Lint Rules
-We enforce strict ESLint guidelines on all `.js` and `.jsx` files:
 ```bash
-# Check code style rules
-npm run lint
-
-# Auto-fix fixable stylistic issues
-npm run lint -- --fix
+npm run dev
 ```
 
-### 3. Verification Checklist Before Pull Requests
-Ensure all three checks succeed locally before opening a pull request:
+Open [http://localhost:5173](http://localhost:5173). Vite provides hot module replacement, so calculator and component edits reload instantly.
+
+---
+
+## 3. Available commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm run dev` | Vite dev server with HMR |
+| `npm run build` | Production bundle to `dist/` |
+| `npm run preview` | Serve the built `dist/` locally |
+| `npm run lint` | ESLint on all `.js`/`.jsx` (excludes `legacy/`, `dist/`) |
+| `npm run lint -- --fix` | Auto-fix lint violations |
+| `npm test` | Vitest in watch mode |
+| `npm run test:run` | Vitest once (CI style) |
+
+---
+
+## 4. Pre-PR checklist
+
+Run all three before opening a pull request:
+
+```bash
+npm run lint && npm run test:run && npm run build
+```
+
+GitHub Actions runs the same checks on every push and PR via `.github/workflows/ci.yml`.
+
+---
+
+## 5. Adding a new calculator
+
+### Step 1 — Create the component
+
+Add `src/calculators/MyCalculator.jsx` following the [Calculator Component Contract](Calculator-Component-Contract). Use `<UnitInput />` for unit-aware fields and `formatWithSIPrefix()` from `mathUtils.js` for output.
+
+### Step 2 — Register in App.jsx
+
+```javascript
+import MyCalculator from './calculators/MyCalculator';
+
+const calculatorComponents = {
+  // ...existing entries
+  myCalculator: MyCalculator,
+};
+```
+
+### Step 3 — Add to panel config
+
+In `src/utils/calculatorConfig.js`, add an entry to the appropriate panel:
+
+```javascript
+{ id: 'myCalculator', name: 'My Calculator' },
+```
+
+The `id` must match the key in `calculatorComponents`.
+
+### Step 4 — Write math tests
+
+Add formula tests to `src/test/calculators.test.js`. Tests verify math only — do not mount React components or interact with the DOM.
+
+```javascript
+describe('My Calculator Formula', () => {
+  it('computes the expected value', () => {
+    const input = 5;
+    expect(input * 2).toBe(10);
+  });
+});
+```
+
+### Step 5 — Verify
+
 ```bash
 npm run lint && npm run test:run && npm run build
 ```
 
 ---
 
-## 🚀 GitHub Actions CI/CD Workflows
+## 6. Testing philosophy
 
-Every commit pushed to a pull request or the `main` branch undergoes automated validation.
+CalcuLab tests **mathematical correctness**, not UI behavior.
 
-* **Continuous Integration (`ci.yml`):** Automatically triggered on all pushes and pull requests. Installs dependencies (`npm ci`), runs ESLint audits, runs Vitest suites, and runs the Vite build to confirm compilation.
-* **Continuous Deployment (`deploy.yml`):** Triggered on pushes to `main`. Automatically compiles the production assets and deploys them to **GitHub Pages**.
+- Tests live in `src/test/`
+- Vitest globals (`describe`, `it`, `expect`) are configured — no imports needed
+- Focus on edge cases: zero inputs, negative values, division by zero, unit conversions
+- Do not mount React components in tests
+
+Run a single test file:
+
+```bash
+npm run test:run -- src/test/calculators.test.js
+```
+
+---
+
+## 7. Landing page changes
+
+Landing page content and section visibility are controlled by `src/pages/landingConfig.js`. Do not edit `LandingPage.jsx` directly unless you are changing layout structure.
+
+---
+
+## 8. Design and product references
+
+Before making visual changes, read:
+
+- `docs/DESIGN.md` — "Digital Lab Notebook" aesthetic, grid lines, border-radius limits, Precision Cobalt accent (`#007bff`, ≤ 10% of UI)
+- `docs/PRODUCT.md` — product goals and UX principles
+
+---
+
+## 9. CI/CD overview
+
+| Workflow | Trigger | Action |
+|----------|---------|--------|
+| `ci.yml` | Push/PR to `main` | Lint, test, build |
+| `deploy.yml` | Push to `main` | Build and deploy to GitHub Pages |
+| `wiki-sync.yml` | Push to `main` (`.github/wiki/**`) | Sync wiki source to GitHub Wiki |
+| `mirror.yml` | Push to `main` | Mirror to Codeberg |
+
+Production URL: [calculab.bio](https://www.calculab.bio/)  
+Codeberg mirror: [codeberg.org/YuvalKolodkin/Calculab](https://codeberg.org/YuvalKolodkin/Calculab)

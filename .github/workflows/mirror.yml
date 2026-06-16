@@ -17,7 +17,10 @@ jobs:
         run: |
           # Configure Codeberg authenticated URL using your secret token
           git remote add codeberg https://YuvalKolodkin:${CODEBERG_TOKEN}@codeberg.org/YuvalKolodkin/Calculab.git
-          
-          # Force push all branches and tags to Codeberg
-          git push codeberg --prune --force --all
-          git push codeberg --prune --force --tags
+
+          # Refresh remote-tracking refs so the mirror reflects current GitHub state.
+          # Push from refs/remotes/origin/* instead of local refs/heads/* to avoid
+          # conflicts with the checked-out branch and to include every branch.
+          git fetch origin
+          git push --prune --force codeberg 'refs/remotes/origin/*:refs/heads/*'
+          git push --prune --force codeberg 'refs/tags/*:refs/tags/*'
