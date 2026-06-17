@@ -25,8 +25,9 @@ desktop.ini
 dist/
 **/build/
 
-# Remotion promo video (local deps + rendered output)
+# Remotion promo videos (local deps + rendered output)
 video/
+.Videos/
 
 # Amplify
 amplify/.config/local-*
