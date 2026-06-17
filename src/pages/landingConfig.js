@@ -16,13 +16,13 @@ export const landingConfig = {
   
   hero: {
     enabled: true,
-    headline: "Get Accurate Lab<br class='mobile-break' /> Calculations — Fast",
-    subheadline: "30+ calculators for molecular biology and biochemistry. Free, browser-based, and always accessible.",
+    headline: "Accurate Lab<br class='mobile-break' /> Calculations, Fast",
+    subheadline: "39 verified calculators for molecular biology and biochemistry. Runs in your browser, works offline at the bench.",
     primaryCTA: "Get Started",
     secondaryCTA: "Explore Calculators",
     trustRow: {
       items: [
-        { label: "30+ Calculators", icon: "Calculator" },
+        { label: "39+ Calculators", icon: "Calculator" },
         { label: "Free to Use", icon: "Sparkles" },
         { label: "Secure", icon: "Lock" }
       ]
@@ -39,7 +39,7 @@ export const landingConfig = {
   
   features: {
     enabled: true,
-    title: "Everything You Need for Lab Calculations",
+    title: "Built for Daily Bench Work",
     items: [
       {
         icon: "Droplet",
@@ -210,9 +210,9 @@ export const landingConfig = {
   
   contact: {
     enabled: true,
-    badge: "Help Us Improve",
-    title: "We'd Love Your Feedback",
-    description: "Share your suggestions, report bugs, or request new calculators. Your input helps us make Calculab better for everyone.",
+    badge: "",
+    title: "Report a bug or request a calculator",
+    description: "Found an error or need a tool we do not have yet? Tell us. Every report goes straight to the team.",
     feedbackLink: "https://forms.gle/pdPBKBYUNTwHTjR9A",
     email: "calculab.help@proton.me"
   },
@@ -221,7 +221,7 @@ export const landingConfig = {
     enabled: true,
     logo: "Calculab",
     credits: "Made by Yuval Kolodkin-Gal & Avichay Nahami",
-    lastUpdated: "Last Updated: June 11, 2026",
+    lastUpdated: "Last Updated: June 17, 2026",
     copyright: "© 2026 Calculab.Bio, All rights reserved.",
     links: [
       { label: "Features", href: "#features" },
