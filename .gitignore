@@ -24,6 +24,9 @@ desktop.ini
 # Build output
 dist/
 
+# Remotion promo video (local deps + rendered output)
+video/
+
 # Amplify
 amplify/.config/local-*
 amplify/logs
