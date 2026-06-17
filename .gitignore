@@ -29,6 +29,8 @@ dist/
 # Remotion promo videos (local deps + rendered output)
 video/
 .Videos/
+# Marketing assets (Remotion renders, local ad work)
+docs/marketing/
 
 # Amplify
 amplify/.config/local-*
