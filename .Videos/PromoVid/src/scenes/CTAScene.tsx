@@ -99,7 +99,19 @@ export const CTAScene: React.FC = () => {
             color: colors.muted,
           }}
         >
-          No signup · Offline · 100% client-side
+          No signup · Works offline · 100% private
+        </div>
+        <div
+          style={{
+            opacity: ctaOpacity,
+            fontFamily: bodyFont,
+            fontSize: 15,
+            color: colors.muted,
+            marginTop: 4,
+            letterSpacing: "0.03em",
+          }}
+        >
+          For bench scientists, grad students &amp; biotech researchers
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

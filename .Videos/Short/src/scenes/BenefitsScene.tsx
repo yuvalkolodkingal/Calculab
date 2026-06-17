@@ -26,7 +26,7 @@ const BENEFITS: Benefit[] = [
     iconColor: COLORS.primary,
     iconBackground: "rgba(0, 123, 255, 0.1)",
     title: "Free to Use",
-    description: "No signup. No paywall. Open the browser and calculate.",
+    description: "No signup. No paywall. No Excel. Open the browser and go.",
   },
   {
     icon: Lock,
@@ -73,7 +73,7 @@ export const BenefitsScene: React.FC = () => {
             }),
           }}
         >
-          Built for the lab
+          Built for bench scientists
         </div>
 
         {BENEFITS.map((benefit, index) => {

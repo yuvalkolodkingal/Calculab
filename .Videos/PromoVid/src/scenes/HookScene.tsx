@@ -56,8 +56,8 @@ export const HookScene: React.FC = () => {
             maxWidth: 1100,
           }}
         >
-          Get Accurate Lab Calculations —{" "}
-          <span style={{ color: colors.primary }}>Fast</span>
+          Still doing lab math{" "}
+          <span style={{ color: colors.primary }}>in Excel?</span>
         </div>
         <div
           style={{
@@ -71,8 +71,8 @@ export const HookScene: React.FC = () => {
             lineHeight: 1.4,
           }}
         >
-          39+ calculators for molecular biology and biochemistry. Free,
-          browser-based, always accessible.
+          39+ verified calculators for molecular biology &amp; biochemistry —
+          free, browser-based, no spreadsheet required.
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

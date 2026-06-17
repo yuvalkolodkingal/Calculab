@@ -106,7 +106,7 @@ export const IntroScene: React.FC = () => {
               margin: "0 auto",
             }}
           >
-            30+ verified calculators for molecular biology &amp; biochemistry
+            39+ verified calculators for molecular biology &amp; biochemistry
           </div>
         </div>
       </AbsoluteFill>

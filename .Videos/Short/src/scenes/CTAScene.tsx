@@ -115,7 +115,18 @@ export const CTAScene: React.FC = () => {
               color: COLORS.textMuted,
             }}
           >
-            Browser-based. No install. 30+ calculators.
+            Free forever. No account. 39+ calculators.
+          </div>
+          <div
+            style={{
+              opacity: ctaOpacity,
+              fontFamily: bodyFont,
+              fontSize: 26,
+              color: COLORS.textMuted,
+              marginTop: 16,
+            }}
+          >
+            For bench scientists &amp; grad students.
           </div>
         </div>
       </AbsoluteFill>

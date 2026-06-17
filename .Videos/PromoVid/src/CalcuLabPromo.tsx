@@ -1,6 +1,7 @@
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, interpolate, staticFile, useVideoConfig } from "remotion";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
+import { Audio } from "@remotion/media";
 import { BenefitsScene } from "./scenes/BenefitsScene";
 import { CTAScene } from "./scenes/CTAScene";
 import { CalculatorDemoScene } from "./scenes/CalculatorDemoScene";
@@ -16,8 +17,22 @@ import {
 export { CALCULAB_PROMO_DURATION };
 
 export const CalcuLabPromo: React.FC = () => {
+  const { fps, durationInFrames } = useVideoConfig();
+  const fadeFrames = Math.round(fps * 1.5);
+
   return (
     <AbsoluteFill>
+      <Audio
+        src={staticFile("bgm.mp3")}
+        volume={(f) =>
+          interpolate(
+            f,
+            [0, fadeFrames, durationInFrames - fadeFrames, durationInFrames],
+            [0, 0.4, 0.4, 0],
+            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+          )
+        }
+      />
       <TransitionSeries>
         <TransitionSeries.Sequence durationInFrames={SCENE_DURATIONS.intro}>
           <IntroScene />

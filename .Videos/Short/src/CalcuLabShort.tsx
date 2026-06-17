@@ -1,6 +1,7 @@
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, interpolate, staticFile, useVideoConfig } from "remotion";
+import { Audio } from "@remotion/media";
 import { BenefitsScene } from "./scenes/BenefitsScene";
 import { CTAScene } from "./scenes/CTAScene";
 import { DemoScene } from "./scenes/DemoScene";
@@ -11,8 +12,22 @@ import { IntroScene } from "./scenes/IntroScene";
 const TRANSITION_FRAMES = 12;
 
 export const CalcuLabShort: React.FC = () => {
+  const { fps, durationInFrames } = useVideoConfig();
+  const fadeFrames = Math.round(fps * 2);
+
   return (
     <AbsoluteFill style={{ backgroundColor: "#f0f4f8" }}>
+      <Audio
+        src={staticFile("bgm.mp3")}
+        volume={(f) =>
+          interpolate(
+            f,
+            [0, fadeFrames, durationInFrames - fadeFrames, durationInFrames],
+            [0, 0.35, 0.35, 0],
+            { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
+          )
+        }
+      />
       <TransitionSeries>
         <TransitionSeries.Sequence durationInFrames={90}>
           <HookScene />
