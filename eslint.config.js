@@ -11,6 +11,9 @@ export default defineConfig([
     'build-tools',
     'amplify/backend/function',
     '.cursor/**',
+    '.Videos/**/build/**',
+    '.Videos/**/out/**',
+    '.Videos/**/node_modules/**',
   ]),
   {
     files: ['**/*.{js,jsx}'],

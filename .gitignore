@@ -23,6 +23,7 @@ desktop.ini
 
 # Build output
 dist/
+**/build/
 
 # Remotion promo video (local deps + rendered output)
 video/
