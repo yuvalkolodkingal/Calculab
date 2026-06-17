@@ -2,7 +2,7 @@
   "name": "CalcuLab",
   "short_name": "CalcuLab",
   "description": "Molecular Biology & Biochemistry Calculator Tools",
-  "start_url": "app",
+  "start_url": "/app",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4F46E5",
